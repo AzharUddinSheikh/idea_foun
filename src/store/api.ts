@@ -3,7 +3,7 @@ import axios from 'axios';
 import * as actions from './apiCallAction'
 
 
-const api : Middleware = ({ getState, dispatch }) => next => async (action) => {
+const api : Middleware = ({ dispatch }) => next => async (action) => {
     if (action.type !== actions.apiCallBegan.type)
         return next(action);
 
