@@ -17,8 +17,7 @@ const postSlice = createSlice({
   initialState,
   reducers: {
     postsReceived: (posts, action) => {
-      console.log(action.payload);
-      posts.list = action.payload.data;
+      posts.list = action.payload;
     },
   },
 });
