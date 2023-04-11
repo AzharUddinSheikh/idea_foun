@@ -2,7 +2,7 @@ export type NewsType = {
   userId: number;
   it: number;
   title: string;
-  description: string;
+  body: string;
 };
 
 export type NewsListProps = {

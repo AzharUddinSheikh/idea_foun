@@ -3,13 +3,13 @@ import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import { NewsType, NewsListProps } from "../types";
 
-function NewsCard({ title, description, userId, ...rest }: NewsType) {
+function NewsCard({ title, body, userId, ...rest }: NewsType) {
   return (
     <Card>
       <Card.Header as="h5">{title}</Card.Header>
       <Card.Body>
         <Card.Title>{`This News is From User With Id ${userId}`}</Card.Title>
-        <Card.Text>{description}</Card.Text>
+        <Card.Text>{body}</Card.Text>
         <Button variant="primary">Read Later</Button>
       </Card.Body>
     </Card>
@@ -23,7 +23,7 @@ const NewsList = ({ newsList }: NewsListProps) => {
         <ListGroup.Item key={`${news.it}-${ind}`}>
           <NewsCard
             title={news.title}
-            description={news.description}
+            body={news.body}
             userId={news.userId}
             it={news.it}
           />
