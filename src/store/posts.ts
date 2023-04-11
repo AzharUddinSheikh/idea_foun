@@ -12,6 +12,7 @@ const initialState = {
 // Define EndPoints
 const POST_URL = "/posts";
 
+// Define Slice
 const postSlice = createSlice({
   name,
   initialState,
