@@ -12,11 +12,14 @@ import Spinner from "react-bootstrap/Spinner";
 
 function News<T extends NewsType>() {
   const dispatch = useDispatch();
-  const [isOpen1, setIsOpen1] = useState(false);
-  const [isOpen2, setIsOpen2] = useState(false);
-  const [isOpen3, setIsOpen3] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isOpen, setIsOpen] = useState<boolean[]>([]);
   const [chunkNews, setChunkNews] = useState<Array<Array<T>>>([]);
+
+  const handleToggle = (index: number) => {
+    const newState = [...isOpen];
+    newState[index] = !newState[index];
+    setIsOpen(newState);
+  };
 
   useEffect(() => {
     dispatch(getPosts());
@@ -26,7 +29,6 @@ function News<T extends NewsType>() {
   useEffect(() => {
     if (getPostData.length > 1) {
       setChunkNews(chunkPost(getPostData, 3));
-      setIsLoading(false);
     }
   }, [getPostData]);
 
@@ -42,51 +44,26 @@ function News<T extends NewsType>() {
               Category 1
             </Typography>
             <Box sx={{ paddingLeft: 2 }}>
-              <div style={{ border: "1px solid #ccc", padding: 8 }}>
-                <Typography variant="subtitle1" component="h3">
-                  <Button
-                    disabled={isLoading}
-                    onClick={() => setIsOpen1(!isOpen1)}
-                  >
-                    {isLoading ? "Loading…" : "SubCategory 1"}
-                  </Button>
-                  <Collapse in={isOpen1}>
-                    <div id="example-collapse-text-1">
-                      <NewsList newsList={chunkNews[0]} />
-                    </div>
-                  </Collapse>
-                </Typography>
-              </div>
-              <div style={{ border: "1px solid #ccc", padding: 8 }}>
-                <Typography variant="subtitle1" component="h3">
-                  <Button
-                    disabled={isLoading}
-                    onClick={() => setIsOpen2(!isOpen2)}
-                  >
-                    {isLoading ? "Loading…" : "SubCategory 2"}
-                  </Button>
-                  <Collapse in={isOpen2}>
-                    <div id="example-collapse-text-1">
-                      <NewsList newsList={chunkNews[1]} />
-                    </div>
-                  </Collapse>
-                </Typography>
-              </div>
-              <div style={{ border: "1px solid #ccc", padding: 8 }}>
-                <Typography variant="subtitle1" component="h3">
-                  <Button
-                    disabled={isLoading}
-                    onClick={() => setIsOpen3(!isOpen3)}
-                  >
-                    {isLoading ? "Loading…" : "SubCategory 3"}
-                  </Button>
-                  <Collapse in={isOpen3}>
-                    <div id="example-collapse-text-1">
-                      <NewsList newsList={chunkNews[2]} />
-                    </div>
-                  </Collapse>
-                </Typography>
-              </div>
+              {getPostData.length === 0 ? (
+                <Spinner animation="border" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </Spinner>
+              ) : (
+                chunkNews.map((chunkList, index) => (
+                  <div style={{ border: "1px solid #ccc", padding: 8 }}>
+                    <Typography variant="subtitle1" component="h3">
+                      <Button onClick={() => handleToggle(index)}>
+                        {`SubCategory ${index + 1}`}
+                      </Button>
+                      <Collapse in={isOpen[index]}>
+                        <div id="example-collapse-text-1">
+                          <NewsList newsList={chunkList} />
+                        </div>
+                      </Collapse>
+                    </Typography>
+                  </div>
+                ))
+              )}
             </Box>
           </div>
           <div style={{ border: "1px solid #ccc", padding: 8 }}></div>
