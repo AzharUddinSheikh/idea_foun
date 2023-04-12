@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 import { Provider } from "react-redux";
 import configStore from "./store/configStore";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 const store = configStore();
 

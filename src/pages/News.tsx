@@ -50,7 +50,10 @@ function News<T extends NewsType>() {
                 </Spinner>
               ) : (
                 chunkNews.map((chunkList, index) => (
-                  <div style={{ border: "1px solid #ccc", padding: 8 }}>
+                  <div
+                    style={{ border: "1px solid #ccc", padding: 8 }}
+                    key={index}
+                  >
                     <Typography variant="subtitle1" component="h3">
                       <Button onClick={() => handleToggle(index)}>
                         {`SubCategory ${index + 1}`}
