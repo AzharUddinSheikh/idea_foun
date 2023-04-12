@@ -21,3 +21,7 @@
 - Click on SubCategory Btn
 - Click on Read Later Btn (hide content and Button)
 - Click on Bookmarked Btn (undo 2nd Point)
+
+# Incompleted
+
+- Unit Testing with 80% coverage
