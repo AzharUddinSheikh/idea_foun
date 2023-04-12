@@ -1,5 +1,6 @@
 # How to Run this App
 
+- Clone it
 - npm i (command for installing packages)
 - npm start (script for running app locally)
 
